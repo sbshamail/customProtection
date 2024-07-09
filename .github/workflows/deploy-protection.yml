@@ -13,7 +13,7 @@ jobs:
         run: |
           FILES=$(git diff --name-only origin/main)
           for FILE in $FILES; do
-            if [[ "$FILE" =~ ^(abc/|package.json) ]]; then
+            if [[ "$FILE" =~ ^(abc/|package.text) ]]; then
               if [ "$(git log -1 --format='%ae' $FILE)" != "your-email@example.com" ]; then
                 echo "Error: Deploy protection violation - $FILE"
                 exit 1
