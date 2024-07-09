@@ -1,0 +1,2 @@
+abc/** deploy-protection=owner-only
+package.text deploy-protection=owner-only
