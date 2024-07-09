@@ -1,0 +1,22 @@
+name: Deploy Protection
+
+on:
+  push:
+    branches:
+      - main # Adjust this to your main branch name
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check protected files
+        run: |
+          FILES=$(git diff --name-only origin/main)
+          for FILE in $FILES; do
+            if [[ "$FILE" =~ ^(abc/|package.json) ]]; then
+              if [ "$(git log -1 --format='%ae' $FILE)" != "your-email@example.com" ]; then
+                echo "Error: Deploy protection violation - $FILE"
+                exit 1
+              fi
+            fi
+          done
